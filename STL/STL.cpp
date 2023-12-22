@@ -60,6 +60,17 @@ void print_list(list<int>& requests)
 
 void lru(list<int>& requests, int request, int size)
 {
+    list<int>::iterator it = requests.begin();
+    bool is_deleted = false;
+    while (!is_deleted && it != requests.end())
+    {
+        if (*it == request)
+        {
+            requests.erase(it);
+            is_deleted = true;
+        }  
+        if (!is_deleted) it++;
+    }
     requests.push_front(request);
     requests.resize(size);
     print_list(requests);
@@ -121,8 +132,8 @@ void print_matrix(map<pair<int, int>, double>& M, int size)
 
 int main()
 {
-    vector<string> v = { "abc", "def", "ghi", "jkl", "abc"};
-    cout << find(v, "abc") << ' ' << find(v, " ") << endl;
+    /*vector<string> v = { "abc", "def", "ghi", "jkl", "abc"};
+    cout << find(v, "abc") << ' ' << find(v, " ") << endl;*/
 
     //replace(v, "abc", "cba");
     //print_vector(v);
@@ -131,18 +142,19 @@ int main()
     print_vector(v);*/
 
 
-    /*list<int> requests;
+    list<int> requests;
     requests.resize(4, -1);
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 8; i++)
     {
-        lru(requests, i, 4);
-    }*/
+        lru(requests, 1, 4);
+    }
+    print_list(requests);
 
-    int size = 3;
+    /*int size = 3;
     map<pair<int, int>, double> M = create_matrix(3);
     cout << sled(M, size) << endl;
     print_matrix(M, size);
-    cout << M.size() << endl;
+    cout << M.size() << endl;*/
 
 
 }
